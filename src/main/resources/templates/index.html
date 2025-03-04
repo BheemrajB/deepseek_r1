@@ -3,52 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Chat</title>
+    <title>Bheem Raj AI Chat</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+        /* Nature background with greenery, plants, and trees */
         body {
-            font-family: Arial, sans-serif;
-            background: url('https://source.unsplash.com/1600x900/?AI,robot') no-repeat center center/cover;
+            font-family: 'Orbitron', sans-serif;
+            background: url('https://source.unsplash.com/1600x900/?greenery,plants,trees') no-repeat center center/cover;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
         }
+
         .chat-container {
-            width: 80%;
-            max-width: 800px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 255, 255, 0.5);
             text-align: center;
+            color: white;
+            animation: fadeIn 1s ease-in-out;
         }
+
         h2 {
-            color: #333;
+            font-size: 26px;
+            font-weight: bold;
+            color: lightblue;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 1);
         }
+
         .input-container {
             display: flex;
             gap: 10px;
             width: 100%;
+            margin-top: 15px;
         }
+
         input {
             flex: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
             font-size: 16px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: 0.3s;
         }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        input:focus {
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+        }
+
         button {
-            background-color: #007bff;
+            background: linear-gradient(45deg, #007bff, #00d4ff);
             color: white;
             border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
             cursor: pointer;
+            transition: 0.3s ease-in-out;
+            font-weight: bold;
         }
+
         button:hover {
-            background-color: #0056b3;
+            background: linear-gradient(45deg, #0056b3, #00aaff);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 204, 255, 0.7);
         }
+
         .response-wrapper {
             margin-top: 20px;
             display: none;
@@ -56,30 +90,51 @@
             justify-content: center;
             gap: 10px;
             cursor: pointer;
+            animation: fadeIn 1s ease-in-out;
         }
+
         .tick-mark {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 30px;
-            height: 30px;
+            width: 35px;
+            height: 35px;
             background: green;
             color: white;
             border-radius: 50%;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
         }
+
+        /* Light white background for the answer box */
         .response-container {
             display: none;
-            margin-top: 10px;
-            padding: 10px;
-            background: #e9ecef;
-            border-radius: 5px;
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
             text-align: left;
             max-height: 300px;
             overflow-y: auto;
             word-wrap: break-word;
             white-space: pre-wrap;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.8s ease-in-out;
+            color: black;
+            font-weight: bold;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
     <script>
@@ -99,7 +154,7 @@
             const response = await fetch("/api/ai/prompt?question=" + encodeURIComponent(question));
             const result = await response.text();
 
-            document.getElementById("response-message").innerText = "Your answer is ready";
+            document.getElementById("response-message").innerText = "Your answer is ready!";
             responseContainer.innerText = result;
             responseWrapper.style.display = "flex";
         }
@@ -112,9 +167,9 @@
 </head>
 <body>
 <div class="chat-container">
-    <h2>Bheemraj AI Chat</h2>
+    <h2>🌳 Bheem Raj AI Chat 🌳</h2>
     <div class="input-container">
-        <input type="text" id="question" placeholder="Ask something...">
+        <input type="text" id="question" placeholder="Drop your query here...">
         <button onclick="sendPrompt()">Send</button>
     </div>
     <div class="response-wrapper" id="response-wrapper" onclick="toggleResponse()">
